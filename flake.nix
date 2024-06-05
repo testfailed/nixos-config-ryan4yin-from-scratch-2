@@ -8,37 +8,59 @@
     nix-on-droid.inputs.nixpkgs.follows = "nixpkgs";
 
     flake-parts.url = "github:hercules-ci/flake-parts";
+    systems.url = "github:nix-systems/default";
+
+    treefmt-nix.url = "github:numtide/treefmt-nix";
+    treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ flake-parts, ...  }:
+  outputs = inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
-      # imports = [ ... ];
+      # systems = [ "aarch64-linux" ];
+      systems = import inputs.systems;
 
-      systems = [ "aarch64-linux" ];
+      imports = [
+        inputs.treefmt-nix.flakeModule
+      ];
 
-      # perSystem = { config, self', inputs', pkgs, system, ...  }: {
-      #   ...
-      # };
+      perSystem = { config, self', inputs', pkgs, system, ... }: {
+        treefmt.config = {
+          projectRootFile = "flake.nix";
+
+          programs.nixpkgs-fmt.enable = true;
+        };
+
+        # Default shell.
+        devShells.default = pkgs.mkShell {
+          name = "default-shell";
+          inputsFrom = [
+            config.treefmt.build.devShell
+          ];
+          packages = with pkgs; [
+            just
+          ];
+        };
+      };
 
       flake = {
-				# nixOnDroidConfigurations.default = nix-on-droid.lib.nixOnDroidConfiguration {
-				# 	modules = [ ./nix-on-droid.nix ];
-				# };
+        # nixOnDroidConfigurations.default = nix-on-droid.lib.nixOnDroidConfiguration {
+        # 	modules = [ ./nix-on-droid.nix ];
+        # };
 
-				# TODO: Config for NixOS Server
-				# nixosConfigurations...
+        # TODO: Config for NixOS Server
+        # nixosConfigurations...
 
-				# TODO: Config for NixOS VM
-				# nixosConfigurations...
+        # TODO: Config for NixOS VM
+        # nixosConfigurations...
 
-				# TODO: Config for Macbook Air M1 (using nix-darwin)
-				# darwinConfigurations...
+        # TODO: Config for Macbook Air M1 (using nix-darwin)
+        # darwinConfigurations...
 
-				# Config for Android (using nix-on-droid)
-				nixOnDroidConfigurations.default =
-					inputs.nix-on-droid.lib.nixOnDroidConfiguration {
-						modules = [ ./nix-on-droid.nix ];
-					};
-			};
-		};
+        # Config for Android (using nix-on-droid)
+        nixOnDroidConfigurations.default =
+          inputs.nix-on-droid.lib.nixOnDroidConfiguration {
+            modules = [ ./nix-on-droid.nix ];
+          };
+      };
+    };
 }
