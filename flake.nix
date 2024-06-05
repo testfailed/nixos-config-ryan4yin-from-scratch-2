@@ -4,12 +4,16 @@
   inputs = {
     # TODO: update nixpkgs and nix-on-droid to v24.05
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
+    # home-manager.url = "github:nix-community/home-manager";
+    # home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nix-on-droid.url = "github:t184256/nix-on-droid/release-23.11";
     nix-on-droid.inputs.nixpkgs.follows = "nixpkgs";
 
     flake-parts.url = "github:hercules-ci/flake-parts";
     systems.url = "github:nix-systems/default";
 
+    # nixvim.url = "github:nix-community/nixvim";
+    # nixvim.inputs.nixpkgs.follows = "nixpkgs";
     treefmt-nix.url = "github:numtide/treefmt-nix";
     treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
@@ -57,10 +61,13 @@
         # darwinConfigurations...
 
         # Config for Android (using nix-on-droid)
-        nixOnDroidConfigurations.default =
-          inputs.nix-on-droid.lib.nixOnDroidConfiguration {
-            modules = [ ./nix-on-droid.nix ];
+        nixOnDroidConfigurations = {
+          droid = inputs.nix-on-droid.lib.nixOnDroidConfiguration {
+            modules = [ ./hosts/droid/nix-on-droid.nix ];
+            # config = ./hosts/droid/nix-on-droid.nix;
+            # system = "aarch64-linux";
           };
+        };
       };
     };
 }
