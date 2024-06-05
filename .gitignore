@@ -3,6 +3,7 @@ result/
 
 *.bak
 *.bak.*
+*.swp
 
 .DS_Store
 result

@@ -6,6 +6,7 @@
     # Core Tools
     bzip2
     coreutils
+    curlFull
     diffutils
     findutils
     git
@@ -21,12 +22,20 @@
     unzip
     utillinux
     vim
+    wget
     xz
     zip
 
     # User Tools
     bat
+    bat-extras.batdiff
+    bat-extras.batgrep
+    bat-extras.batman
+    bat-extras.batpipe
+    bat-extras.batwatch
+    bat-extras.prettybat
     delta
+    eza
     fzf
     neovim
     nodejs
