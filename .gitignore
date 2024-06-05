@@ -1,0 +1,8 @@
+.direnv/
+result/
+
+*.bak
+*.bak.*
+
+.DS_Store
+result
