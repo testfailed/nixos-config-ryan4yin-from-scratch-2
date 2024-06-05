@@ -3,14 +3,11 @@
 {
   # Simply install just the packages
   environment.packages = with pkgs; [
-    # User-facing stuff that you really really want to have
-    bat
+    # Core Tools
     bzip2
     coreutils
-    delta
     diffutils
     findutils
-    fzf
     git
     gnugrep
     gnupg
@@ -19,22 +16,31 @@
     gzip
     hostname
     man
-    neovim
-    nodejs
     openssh
-    python3
-    tmux
     tzdata
     unzip
     utillinux
     vim
     xz
     zip
+
+    # User Tools
+    bat
+    delta
+    fzf
+    neovim
+    nodejs
+    tmux
+    zoxide
     zsh
+
+    # Development Tools
+    python3
+    # nodejs
   ];
 
   # Backup etc files instead of failing to activate generation if a file already exists in /etc
-  environment.etcBackupExtension = ".bak";
+  environment.etcBackupExtension = ".before-nix-on-droid";
 
   # Read the changelog before changing this value
   system.stateVersion = "23.05";
@@ -45,5 +51,5 @@
   '';
 
   # Set your time zone
-  #time.timeZone = "Europe/Berlin";
+  time.timeZone = "Asia/Seoul";
 }
