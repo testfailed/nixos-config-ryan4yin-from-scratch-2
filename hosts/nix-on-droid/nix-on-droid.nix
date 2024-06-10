@@ -24,21 +24,21 @@
       home.stateVersion = "22.11";
       # nixpkgs.overlays = config.nixpkgs.overlays;
       # imports = [
-        # ../../home/config/identity.nix
-        # ../../home/assorted-tools.nix
-        # ../../home/bash.nix
-        # ../../home/bat.nix
-        # ../../home/common.nix
-        # ../../home/eza.nix
-        # ../../home/git.nix
-        # ../../home/htop.nix
-        # ../../home/mosh.nix
-        # ../../home/neovim.nix
-        # ../../home/ssh.nix
-        # ../../home/tmux.nix
-        # ../../home/zsh.nix
+      # ../../home/config/identity.nix
+      # ../../home/assorted-tools.nix
+      # ../../home/bash.nix
+      # ../../home/bat.nix
+      # ../../home/common.nix
+      # ../../home/eza.nix
+      # ../../home/git.nix
+      # ../../home/htop.nix
+      # ../../home/mosh.nix
+      # ../../home/neovim.nix
+      # ../../home/ssh.nix
+      # ../../home/tmux.nix
+      # ../../home/zsh.nix
 
-        # ../../home/python.nix
+      # ../../home/python.nix
       # ];
 
       # home.packages = with pkgs; [ neovim ];

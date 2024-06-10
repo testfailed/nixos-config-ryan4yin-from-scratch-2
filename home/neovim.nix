@@ -2,7 +2,8 @@
 
 let
   withLang = lang: builtins.elem lang config.language-support;
-in {
+in
+{
   programs.nixvim = {
     enable = true;
 
